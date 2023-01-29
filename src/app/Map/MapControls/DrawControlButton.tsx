@@ -1,5 +1,5 @@
 import type { JSXElementConstructor } from 'react';
-import styles from './DrawControls.module.scss';
+import styles from './MapControls.module.scss';
 
 interface Props {
   icon: JSXElementConstructor<{ title?: string }>;
@@ -12,13 +12,11 @@ interface Props {
   // mergePolygons?: () => void;
 }
 
-export const DrawControlsButton = ({ icon }: Props) => {
+export const DrawControlButton = ({ icon }: Props) => {
   const IconComponent = icon;
   return (
-    <div className={styles.mapDrawControls_buttonContainer}>
-      <div className={styles.mapDrawControls_button}>
-        <IconComponent />
-      </div>
+    <div className={styles.mapControls_item}>
+      <IconComponent />
     </div>
   );
 };

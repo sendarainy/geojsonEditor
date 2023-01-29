@@ -1,11 +1,11 @@
 import { LatLngExpression } from 'leaflet';
-import { MapContainer, TileLayer, ZoomControl } from 'react-leaflet';
+import { MapContainer, TileLayer } from 'react-leaflet';
 
 import 'leaflet/dist/leaflet.css';
 import '@geoman-io/leaflet-geoman-free';
 import '@geoman-io/leaflet-geoman-free/dist/leaflet-geoman.css';
 
-import { DrawControls } from './DrawControls';
+import { MapControls } from './MapControls';
 
 const POSITION: LatLngExpression = [51.505, -0.09];
 const TILE_URL =
@@ -15,8 +15,7 @@ export const Map = () => {
   return (
     <MapContainer zoom={13} center={POSITION} zoomControl={false}>
       <TileLayer url={TILE_URL} />
-      <ZoomControl position="topright" />
-      <DrawControls />
+      <MapControls />
     </MapContainer>
   );
 };

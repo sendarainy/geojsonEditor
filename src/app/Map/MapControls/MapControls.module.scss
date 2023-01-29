@@ -1,0 +1,60 @@
+.mapControls_container {
+  position: absolute;
+  right: 10px;
+  top: 10px;
+  z-index: 400;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-content: center;
+  gap: 10px;
+}
+
+.mapControls_section {
+  border-radius: 8px;
+  overflow: hidden;
+
+  box-shadow: rgba(99, 99, 99, 0.3) 0px 2px 8px 0px;
+}
+
+.mapControls_item {
+  width: 20px;
+  height: 45px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0 15px;
+  background-color: #fff;
+
+  font-size: 28px;
+
+  cursor: pointer;
+
+  &:hover {
+    background-color: #f4f4f4;
+  }
+}
+
+.mapControls_item:not(:last-child) {
+  border-bottom: 1px solid #ccc;
+}
+.mapControls_itemActive {
+  box-shadow: inset 0 -1px 5px 2px rgb(81 77 77 / 31%);
+}
+
+.mapControls_button {
+  background: none repeat scroll 0 0 transparent;
+  border: medium none;
+  border-spacing: 0;
+  color: #26589f;
+  font-family: 'PT Sans Narrow', sans-serif;
+  font-size: 16px;
+  font-weight: normal;
+  line-height: 1.42rem;
+  list-style: none outside none;
+  margin: 0;
+  padding: 0;
+  text-align: left;
+  text-decoration: none;
+  text-indent: 0;
+}
