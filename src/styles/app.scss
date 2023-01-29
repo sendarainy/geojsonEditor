@@ -17,7 +17,7 @@ body {
   position: relative;
   // right: 0;
   height: 100%;
-  z-index: 0;
+  // z-index: 0;
 }
 
 // zoom buttons
@@ -44,6 +44,11 @@ body {
   border-radius: 8px;
   overflow: hidden;
   // border-color: #fff;
+}
+
+.leaflet-div-icon {
+  background-color: transparent;
+  border: 0;
 }
 
 /* .leaflet-tooltip-top:before {

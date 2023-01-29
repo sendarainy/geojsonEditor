@@ -1,27 +1,48 @@
 import { useCallback } from 'react';
 import type { ChangeEvent } from 'react';
-// import { useMap } from 'react-leaflet';
+import type {} from 'leaflet';
+import { useMap } from 'react-leaflet';
+
 import { ReactComponent as UploadIcon } from 'assets/upload-icon.svg';
+
+import { processFeature, processFeatureCollection } from '../utils';
 
 import styles from './MapControls.module.scss';
 
+// const;
+
 export const UploadControl = () => {
-  // const map = useMap();
+  const map = useMap();
 
-  const onUpload = useCallback((e: ChangeEvent<HTMLInputElement>) => {
-    const reader = new FileReader();
+  const onUpload = useCallback(
+    (e: ChangeEvent<HTMLInputElement>) => {
+      const reader = new FileReader();
 
-    const onReaderLoad = () => {
-      const json = JSON.parse(reader.result as string);
-      console.log(json);
-    };
+      const onReaderLoad = () => {
+        const geoJson: GeoJSON.Feature | GeoJSON.FeatureCollection = JSON.parse(
+          reader.result as string
+        );
 
-    reader.onload = onReaderLoad;
+        console.log({ geoJson });
+        console.log(geoJson.type);
 
-    if (e.currentTarget.files?.length) {
-      reader.readAsText(e.currentTarget.files[0]);
-    }
-  }, []);
+        if (geoJson.type === 'Feature') {
+          processFeature(geoJson, map);
+        }
+
+        if (geoJson.type === 'FeatureCollection') {
+          processFeatureCollection(geoJson, map);
+        }
+      };
+
+      reader.onload = onReaderLoad;
+
+      if (e.currentTarget.files?.length) {
+        reader.readAsText(e.currentTarget.files[0]);
+      }
+    },
+    [map]
+  );
 
   return (
     <div className={styles.mapControls_section}>
