@@ -36,14 +36,13 @@ export const processFeature = (feature: GeoJSON.Feature, map: Map) => {
           feature.geometry.type
         ) as [number, number][],
         {
-          // color,
+          color: feature.properties?.color || undefined,
           weight: 2,
         }
       ).addTo(map);
     });
   }
   if (feature.geometry.type === 'Polygon') {
-    console.log(feature.geometry);
     new Polygon(
       getLatLngCoordinates(
         feature.geometry.coordinates as
@@ -53,7 +52,7 @@ export const processFeature = (feature: GeoJSON.Feature, map: Map) => {
         feature.geometry.type
       )!,
       {
-        // color,
+        color: feature.properties?.color || undefined,
         weight: 2,
       }
     ).addTo(map);

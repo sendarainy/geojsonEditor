@@ -12,38 +12,16 @@ body {
 }
 
 /* -- LEAFLET -- */
+// .leaflet-tile-pane {
+//   filter: grayscale(100%);
+// }
+
 .leaflet-container {
   // top: 0;
   position: relative;
   // right: 0;
   height: 100%;
   // z-index: 0;
-}
-
-// zoom buttons
-.leaflet-control-zoom-in,
-.leaflet-control-zoom-out {
-  width: 50px !important;
-  height: 40px !important;
-  line-height: 35px !important;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: #fff;
-
-  // &:hover {
-  // width: 50px;
-  // display: flex;
-  // justify-content: center;
-  // align-items: center;
-  // }
-}
-.leaflet-control-zoom {
-  width: 50px;
-  border: 0 !important;
-  border-radius: 8px;
-  overflow: hidden;
-  // border-color: #fff;
 }
 
 .leaflet-div-icon {

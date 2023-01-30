@@ -23,9 +23,6 @@ export const UploadControl = () => {
           reader.result as string
         );
 
-        console.log({ geoJson });
-        console.log(geoJson.type);
-
         if (geoJson.type === 'Feature') {
           processFeature(geoJson, map);
         }
