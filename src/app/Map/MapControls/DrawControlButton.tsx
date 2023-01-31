@@ -1,5 +1,6 @@
 import { useCallback, useMemo } from 'react';
-import type { JSXElementConstructor, Dispatch, SetStateAction } from 'react';
+import type { JSXElementConstructor } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { useMap } from 'react-leaflet';
 import cn from 'clsx';
 
@@ -8,12 +9,12 @@ import { disableGeoman } from '../utils';
 
 import styles from './MapControls.module.scss';
 
+import { actions, select } from 'store/map';
+
 interface Props {
   icon: JSXElementConstructor<{ title?: string }>;
   action: ActionType;
   title: string;
-  selectedAction: ActionType | null;
-  setSelectedAction: Dispatch<SetStateAction<ActionType | null>>;
   // cancelHandler: () => void;
   // onClickHandler: (mode: string) => () => void;
   // lastActionCancelHandler: (selectedMode: 'Polygon' | 'Cut') => () => void;
@@ -21,14 +22,11 @@ interface Props {
   // mergePolygons?: () => void;
 }
 
-export const DrawControlButton = ({
-  icon,
-  title,
-  action,
-  selectedAction,
-  setSelectedAction,
-}: Props) => {
+export const DrawControlButton = ({ icon, title, action }: Props) => {
+  const dispatch = useDispatch();
   const map = useMap();
+
+  const selectedAction = useSelector(select.selectedAction);
 
   const isActive = useMemo(
     () => selectedAction === action,
@@ -39,10 +37,10 @@ export const DrawControlButton = ({
     disableGeoman(map);
 
     if (selectedAction === action) {
-      setSelectedAction(null);
+      dispatch(actions.setSelectedAction(null));
       return;
     } else {
-      setSelectedAction(action);
+      dispatch(actions.setSelectedAction(action));
     }
 
     switch (action) {
@@ -63,7 +61,7 @@ export const DrawControlButton = ({
       default:
         break;
     }
-  }, [setSelectedAction, map, action, selectedAction]);
+  }, [dispatch, action, map, selectedAction]);
 
   const IconComponent = icon;
 

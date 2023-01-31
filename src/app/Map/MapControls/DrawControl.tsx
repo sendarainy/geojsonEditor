@@ -1,4 +1,4 @@
-import { /*useCallback,*/ useState } from 'react';
+// import { useCallback } from 'react';
 
 import { ReactComponent as DrawIcon } from 'assets/draw-icon.svg';
 import { ReactComponent as EditIcon } from 'assets/edit-icon.svg';
@@ -12,10 +12,9 @@ import { ActionType } from '../types';
 import { DrawControlButton } from './DrawControlButton';
 
 import styles from './MapControls.module.scss';
+import { memo } from 'react';
 
-export const DrawControl = () => {
-  const [selectedAction, setSelectedAction] = useState<ActionType | null>(null);
-
+export const DrawControl = memo(() => {
   // const onClick = useCallback(() => {}, []);
 
   return (
@@ -24,44 +23,32 @@ export const DrawControl = () => {
         title="Draw Polygon"
         action={ActionType.DRAW}
         icon={DrawIcon}
-        selectedAction={selectedAction}
-        setSelectedAction={setSelectedAction}
       />
       <DrawControlButton
         title="Edit Mode"
         action={ActionType.EDIT}
         icon={EditIcon}
-        selectedAction={selectedAction}
-        setSelectedAction={setSelectedAction}
       />
       <DrawControlButton
         title="Merge Mode"
         action={ActionType.MERGE}
         icon={MergeIcon}
-        selectedAction={selectedAction}
-        setSelectedAction={setSelectedAction}
       />
       <DrawControlButton
         title="Cut Mode"
         action={ActionType.CUT}
         icon={CutIcon}
-        selectedAction={selectedAction}
-        setSelectedAction={setSelectedAction}
       />
       <DrawControlButton
         title="Drag Mode"
         action={ActionType.DRAG}
         icon={DragIcon}
-        selectedAction={selectedAction}
-        setSelectedAction={setSelectedAction}
       />
       <DrawControlButton
         title="Remove mode"
         action={ActionType.REMOVE}
         icon={RemoveIcon}
-        selectedAction={selectedAction}
-        setSelectedAction={setSelectedAction}
       />
     </div>
   );
-};
+});

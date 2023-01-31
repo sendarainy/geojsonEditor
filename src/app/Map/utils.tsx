@@ -40,14 +40,14 @@ export const processFeature = (feature: GeoJSON.Feature, map: Map) => {
           weight: 2,
         }
       );
-      polygon.on('click', () => {
-        disableGeoman(map);
-        if (polygon.pm.enabled()) {
-          polygon.pm.disable();
-          return;
-        }
-        polygon.pm.enable({ limitMarkersToCount: 3 });
-      });
+      // polygon.on('click', () => {
+      //   disableGeoman(map);
+      //   if (polygon.pm.enabled()) {
+      //     polygon.pm.disable();
+      //     return;
+      //   }
+      //   polygon.pm.enable({ limitMarkersToCount: 3 });
+      // });
       polygon.addTo(map);
     });
   }
@@ -65,20 +65,20 @@ export const processFeature = (feature: GeoJSON.Feature, map: Map) => {
         weight: 2,
       }
     );
-    polygon.on('click', () => {
-      disableGeoman(map);
-      polygon.pm.enable({ limitMarkersToCount: 3 });
-    });
+    // polygon.on('click', () => {
+    //   disableGeoman(map);
+    //   polygon.pm.enable({ limitMarkersToCount: 3 });
+    // });
     polygon.addTo(map);
   }
   if (feature.geometry.type === 'Point') {
     const [lng, lat] = feature.geometry.coordinates;
 
     const marker = new Marker({ lat, lng }, { icon, ...feature.properties });
-    marker.on('click', () => {
-      disableGeoman(map);
-      marker.pm.enable();
-    });
+    // marker.on('click', () => {
+    //   disableGeoman(map);
+    //   marker.pm.enable();
+    // });
     marker.addTo(map);
   }
 };
