@@ -10,6 +10,7 @@ import { disableGeoman } from '../utils';
 import styles from './MapControls.module.scss';
 
 import { actions, select } from 'store/map';
+import { Polygon } from 'leaflet';
 
 interface Props {
   icon: JSXElementConstructor<{ title?: string }>;
@@ -55,6 +56,10 @@ export const DrawControlButton = ({ icon, title, action }: Props) => {
         break;
       }
       case ActionType.DRAG: {
+        break;
+      }
+      case ActionType.REMOVE: {
+        map.pm.enableGlobalRemovalMode();
         break;
       }
 

@@ -1,11 +1,16 @@
 import { useCallback } from 'react';
 import { Marker, Polygon } from 'leaflet';
+import type { MarkerOptions } from 'leaflet';
 import { useMap } from 'react-leaflet';
 import download from 'js-file-download';
 
 import { ReactComponent as DownloadIcon } from 'assets/download-icon.svg';
 
 import styles from './MapControls.module.scss';
+
+function instanceOfMarkerOptions(options: any): options is MarkerOptions {
+  return 'icon' in options;
+}
 
 export const DownloadControl = () => {
   const map = useMap();
@@ -15,6 +20,9 @@ export const DownloadControl = () => {
 
     const features = layers.map((l) => {
       const properties = l.options;
+      if (instanceOfMarkerOptions(properties)) {
+        delete properties.icon;
+      }
       const feature = {
         ...l.toGeoJSON(),
         properties,

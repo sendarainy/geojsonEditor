@@ -9,8 +9,6 @@ import { processFeature, processFeatureCollection } from '../utils';
 
 import styles from './MapControls.module.scss';
 
-// const;
-
 export const UploadControl = () => {
   const map = useMap();
 

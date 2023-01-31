@@ -74,7 +74,7 @@ export const processFeature = (feature: GeoJSON.Feature, map: Map) => {
   if (feature.geometry.type === 'Point') {
     const [lng, lat] = feature.geometry.coordinates;
 
-    const marker = new Marker({ lat, lng }, { icon, ...feature.properties });
+    const marker = new Marker({ lat, lng }, { ...feature.properties, icon });
     // marker.on('click', () => {
     //   disableGeoman(map);
     //   marker.pm.enable();
