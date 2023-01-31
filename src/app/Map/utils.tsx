@@ -37,7 +37,7 @@ export const processFeature = (feature: GeoJSON.Feature, map: Map) => {
         ) as [number, number][],
         {
           ...feature.properties,
-          weight: 2,
+          // weight: 2,
         }
       );
       // polygon.on('click', () => {
@@ -62,7 +62,7 @@ export const processFeature = (feature: GeoJSON.Feature, map: Map) => {
       )!,
       {
         ...feature.properties,
-        weight: 2,
+        // weight: 2,
       }
     );
     // polygon.on('click', () => {

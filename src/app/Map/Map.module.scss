@@ -1,3 +1,17 @@
+.map {
+  /**
+  * leaflet-geoman vertexes don't inherit a polygon color
+  * inherit the color from the map container styles
+  */
+  :global {
+    .marker-icon,
+    .leaflet-pane,
+    .leaflet-marker-pane {
+      border-color: inherit;
+    }
+  }
+}
+
 .mapMarker {
   transform: translateY(-19px);
   color: #1342a1;
