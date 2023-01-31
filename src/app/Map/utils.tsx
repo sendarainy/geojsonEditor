@@ -27,7 +27,7 @@ export const getLatLngCoordinates = (
 export const processFeature = (feature: GeoJSON.Feature, map: Map) => {
   if (feature.geometry.type === 'MultiPoint') {
     feature.geometry.coordinates.forEach((coords) => {
-      new Polygon(
+      const polygon = new Polygon(
         getLatLngCoordinates(
           coords as
             | [number, number]
@@ -36,14 +36,23 @@ export const processFeature = (feature: GeoJSON.Feature, map: Map) => {
           feature.geometry.type
         ) as [number, number][],
         {
-          color: feature.properties?.color || undefined,
+          ...feature.properties,
           weight: 2,
         }
-      ).addTo(map);
+      );
+      polygon.on('click', () => {
+        disableGeoman(map);
+        if (polygon.pm.enabled()) {
+          polygon.pm.disable();
+          return;
+        }
+        polygon.pm.enable({ limitMarkersToCount: 3 });
+      });
+      polygon.addTo(map);
     });
   }
   if (feature.geometry.type === 'Polygon') {
-    new Polygon(
+    const polygon = new Polygon(
       getLatLngCoordinates(
         feature.geometry.coordinates as
           | [number, number]
@@ -52,15 +61,25 @@ export const processFeature = (feature: GeoJSON.Feature, map: Map) => {
         feature.geometry.type
       )!,
       {
-        color: feature.properties?.color || undefined,
+        ...feature.properties,
         weight: 2,
       }
-    ).addTo(map);
+    );
+    polygon.on('click', () => {
+      disableGeoman(map);
+      polygon.pm.enable({ limitMarkersToCount: 3 });
+    });
+    polygon.addTo(map);
   }
   if (feature.geometry.type === 'Point') {
     const [lng, lat] = feature.geometry.coordinates;
 
-    new Marker({ lat, lng }, { icon }).addTo(map);
+    const marker = new Marker({ lat, lng }, { icon, ...feature.properties });
+    marker.on('click', () => {
+      disableGeoman(map);
+      marker.pm.enable();
+    });
+    marker.addTo(map);
   }
 };
 
@@ -71,4 +90,17 @@ export const processFeatureCollection = (
   featureCollection.features.forEach((feature) => {
     processFeature(feature, map);
   });
+};
+
+export const disableGeoman = (map: Map) => {
+  map.pm.disableDraw();
+  map.pm.disableGlobalEditMode();
+  map.pm.disableGlobalDragMode();
+  map.pm.disableGlobalCutMode();
+  map.pm.disableGlobalRemovalMode();
+
+  map.off('pm:create');
+  map.off('pm:remove');
+  map.off('pm:cut');
+  map.off('mouseup');
 };

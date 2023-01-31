@@ -42,7 +42,11 @@ export const UploadControl = () => {
   );
 
   return (
-    <div className={styles.mapControls_section}>
+    <div
+      className={styles.mapControls_section}
+      role="button"
+      title="Upload geoJSON"
+    >
       <label
         htmlFor="upload"
         className={styles.mapControls_item}

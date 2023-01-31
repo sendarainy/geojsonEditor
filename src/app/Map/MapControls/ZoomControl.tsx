@@ -7,15 +7,27 @@ export const ZoomControl = () => {
   const zoomIn = useCallback(() => {
     map.zoomIn();
   }, [map]);
+
   const zoomOut = useCallback(() => {
     map.zoomOut();
   }, [map]);
+
   return (
     <div className={styles.mapControls_section}>
-      <div onClick={zoomIn} className={styles.mapControls_item}>
+      <div
+        role="button"
+        title="Zoom In"
+        onClick={zoomIn}
+        className={styles.mapControls_item}
+      >
         +
       </div>
-      <div onClick={zoomOut} className={styles.mapControls_item}>
+      <div
+        role="button"
+        title="Zoom Out"
+        onClick={zoomOut}
+        className={styles.mapControls_item}
+      >
         -
       </div>
     </div>
