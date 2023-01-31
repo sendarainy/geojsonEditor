@@ -56,6 +56,7 @@ export const DrawControlButton = ({ icon, title, action }: Props) => {
         break;
       }
       case ActionType.DRAG: {
+        map.pm.enableGlobalDragMode();
         break;
       }
       case ActionType.REMOVE: {
