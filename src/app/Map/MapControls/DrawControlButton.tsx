@@ -7,7 +7,7 @@ import cn from 'clsx';
 import { actions, select } from 'store/map';
 
 import { ActionType } from '../types';
-import { enableDraw, enableCut, disableGeoman } from '../utils';
+import { disableGeoman } from '../utils';
 
 import styles from './MapControls.module.scss';
 
@@ -15,11 +15,6 @@ interface Props {
   icon: JSXElementConstructor<{ title?: string }>;
   action: ActionType;
   title: string;
-  // cancelHandler: () => void;
-  // onClickHandler: (mode: string) => () => void;
-  // lastActionCancelHandler: (selectedMode: 'Polygon' | 'Cut') => () => void;
-  // polygonsToMerge?: GeomanLayer[];
-  // mergePolygons?: () => void;
 }
 
 export const DrawControlButton = ({ icon, title, action }: Props) => {
@@ -38,38 +33,8 @@ export const DrawControlButton = ({ icon, title, action }: Props) => {
 
     if (selectedAction === action) {
       dispatch(actions.setSelectedAction(null));
-      return;
     } else {
       dispatch(actions.setSelectedAction(action));
-    }
-
-    switch (action) {
-      case ActionType.DRAW: {
-        enableDraw(map, dispatch);
-        break;
-      }
-      case ActionType.EDIT: {
-        map.pm.enableGlobalEditMode({ limitMarkersToCount: 3 });
-        break;
-      }
-      // case ActionType.MERGE: {
-      //   break;
-      // }
-      case ActionType.CUT: {
-        enableCut(map, dispatch);
-        break;
-      }
-      case ActionType.DRAG: {
-        map.pm.enableGlobalDragMode();
-        break;
-      }
-      case ActionType.REMOVE: {
-        map.pm.enableGlobalRemovalMode();
-        break;
-      }
-
-      default:
-        break;
     }
   }, [dispatch, action, map, selectedAction]);
 
