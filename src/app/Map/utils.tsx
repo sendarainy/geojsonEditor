@@ -102,6 +102,13 @@ export const enableDraw = (map: Map, dispatch: Dispatch) => {
   });
 };
 
+export const enableCut = (map: Map, dispatch: Dispatch) => {
+  map.pm.enableGlobalCutMode();
+  map.on('pm:cut', () => {
+    dispatch(actions.setSelectedAction(null));
+  });
+};
+
 export const disableGeoman = (map: Map) => {
   map.pm.disableDraw();
   map.pm.disableGlobalEditMode();

@@ -7,7 +7,7 @@ import cn from 'clsx';
 import { actions, select } from 'store/map';
 
 import { ActionType } from '../types';
-import { enableDraw, disableGeoman } from '../utils';
+import { enableDraw, enableCut, disableGeoman } from '../utils';
 
 import styles from './MapControls.module.scss';
 
@@ -52,7 +52,11 @@ export const DrawControlButton = ({ icon, title, action }: Props) => {
         map.pm.enableGlobalEditMode({ limitMarkersToCount: 3 });
         break;
       }
+      // case ActionType.MERGE: {
+      //   break;
+      // }
       case ActionType.CUT: {
+        enableCut(map, dispatch);
         break;
       }
       case ActionType.DRAG: {
