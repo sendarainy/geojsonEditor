@@ -95,11 +95,15 @@ export const processFeatureCollection = (
   });
 };
 
-export const enableDraw = (map: Map, dispatch: Dispatch) => {
+export const enableDrawPolygon = (map: Map, dispatch: Dispatch) => {
   map.pm.enableDraw('Polygon');
   map.on('pm:create', () => {
     dispatch(actions.setSelectedAction(null));
   });
+};
+
+export const enableDrawPoint = (map: Map) => {
+  map.pm.enableDraw('Marker', { markerStyle: { icon } });
 };
 
 export const enableCut = (map: Map, dispatch: Dispatch) => {

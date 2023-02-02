@@ -1,13 +1,10 @@
 import { useCallback, useMemo } from 'react';
 import type { JSXElementConstructor } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useMap } from 'react-leaflet';
 import cn from 'clsx';
 
 import { actions, select } from 'store/map';
-
-import { ActionType } from '../types';
-import { disableGeoman } from '../utils';
+import { ActionType } from 'types/map';
 
 import styles from './MapControls.module.scss';
 
@@ -19,7 +16,6 @@ interface Props {
 
 export const DrawControlButton = ({ icon, title, action }: Props) => {
   const dispatch = useDispatch();
-  const map = useMap();
 
   const selectedAction = useSelector(select.selectedAction);
 
@@ -29,14 +25,12 @@ export const DrawControlButton = ({ icon, title, action }: Props) => {
   );
 
   const onClick = useCallback(() => {
-    disableGeoman(map);
-
     if (selectedAction === action) {
       dispatch(actions.setSelectedAction(null));
     } else {
       dispatch(actions.setSelectedAction(action));
     }
-  }, [dispatch, action, map, selectedAction]);
+  }, [dispatch, action, selectedAction]);
 
   const IconComponent = icon;
 

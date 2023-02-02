@@ -4,19 +4,27 @@ import { useMap } from 'react-leaflet';
 
 import { select } from 'store/map';
 
-import { ReactComponent as DrawIcon } from 'assets/draw-icon.svg';
+import { ReactComponent as PolygonIcon } from 'assets/draw-icon.svg';
+import { ReactComponent as PointIcon } from 'assets/drop-icon.svg';
 import { ReactComponent as EditIcon } from 'assets/edit-icon.svg';
 // import { ReactComponent as MergeIcon } from 'assets/merge-icon.svg';
 import { ReactComponent as CutIcon } from 'assets/cut-icon.svg';
 import { ReactComponent as DragIcon } from 'assets/drag-icon.svg';
 import { ReactComponent as RemoveIcon } from 'assets/remove-icon.svg';
 
-import { ActionType } from '../types';
-import { enableDraw, enableCut } from '../utils';
+import { ActionType } from 'types/map';
+import {
+  enableDrawPolygon,
+  enableDrawPoint,
+  enableCut,
+  disableGeoman,
+} from '../utils';
 
 import { DrawControlButton } from './DrawControlButton';
 
 import styles from './MapControls.module.scss';
+
+const SmallPointIcon = () => <PointIcon width="16px" />;
 
 export const DrawControl = memo(() => {
   const dispatch = useDispatch();
@@ -25,9 +33,15 @@ export const DrawControl = memo(() => {
   const selectedAction = useSelector(select.selectedAction);
 
   useEffect(() => {
+    disableGeoman(map);
+
     switch (selectedAction) {
-      case ActionType.DRAW: {
-        enableDraw(map, dispatch);
+      case ActionType.DRAW_POLYGON: {
+        enableDrawPolygon(map, dispatch);
+        break;
+      }
+      case ActionType.DRAW_POINT: {
+        enableDrawPoint(map);
         break;
       }
       case ActionType.EDIT: {
@@ -59,8 +73,13 @@ export const DrawControl = memo(() => {
     <div className={styles.mapControls_section}>
       <DrawControlButton
         title="Draw Polygon"
-        action={ActionType.DRAW}
-        icon={DrawIcon}
+        action={ActionType.DRAW_POLYGON}
+        icon={PolygonIcon}
+      />
+      <DrawControlButton
+        title="Draw Point"
+        action={ActionType.DRAW_POINT}
+        icon={SmallPointIcon}
       />
       <DrawControlButton
         title="Edit Mode"

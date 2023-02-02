@@ -1,4 +1,4 @@
-import { ReactComponent as Icon } from './drop-icon.svg';
+import { ReactComponent as Icon } from 'assets/drop-icon.svg';
 
 interface DropIconProps {
   color?: string;

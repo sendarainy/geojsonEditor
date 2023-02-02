@@ -6,15 +6,6 @@ export interface MultiPolygon {
   coordinates: [number, number][] | [number, number][][];
 }
 
-export enum ActionType {
-  DRAW = 'DRAW',
-  EDIT = 'EDIT',
-  MERGE = 'MERGE',
-  CUT = 'CUT',
-  DRAG = 'DRAG',
-  REMOVE = 'REMOVE',
-}
-
 export interface GeomanLayerStyleObject {
   color?: string;
   weight?: number;
