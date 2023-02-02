@@ -4,13 +4,12 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useMap } from 'react-leaflet';
 import cn from 'clsx';
 
+import { actions, select } from 'store/map';
+
 import { ActionType } from '../types';
-import { disableGeoman } from '../utils';
+import { enableDraw, disableGeoman } from '../utils';
 
 import styles from './MapControls.module.scss';
-
-import { actions, select } from 'store/map';
-import { Polygon } from 'leaflet';
 
 interface Props {
   icon: JSXElementConstructor<{ title?: string }>;
@@ -46,6 +45,7 @@ export const DrawControlButton = ({ icon, title, action }: Props) => {
 
     switch (action) {
       case ActionType.DRAW: {
+        enableDraw(map, dispatch);
         break;
       }
       case ActionType.EDIT: {

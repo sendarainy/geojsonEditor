@@ -1,6 +1,9 @@
 import { renderToString } from 'react-dom/server';
+import { Dispatch } from '@reduxjs/toolkit';
 import { GeoJSON, Marker, Polygon, DivIcon } from 'leaflet';
 import type { LatLngExpression, Map } from 'leaflet';
+
+import { actions } from 'store/map';
 
 import { MarkerIcon } from './MarkerIcon';
 import styles from './Map.module.scss';
@@ -89,6 +92,13 @@ export const processFeatureCollection = (
 ) => {
   featureCollection.features.forEach((feature) => {
     processFeature(feature, map);
+  });
+};
+
+export const enableDraw = (map: Map, dispatch: Dispatch) => {
+  map.pm.enableDraw('Polygon');
+  map.on('pm:create', () => {
+    dispatch(actions.setSelectedAction(null));
   });
 };
 

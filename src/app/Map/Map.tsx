@@ -21,8 +21,8 @@ export const Map = memo(() => {
        * leaflet-geoman vertexes don't inherit a polygon color,
        * so pass the color of selected polygon and then inherit it with scss
        */
-      // TODO
-      // style={{ borderColor: selectedPolygon }}
+      // TODO when color choose will be supported
+      // style={{ borderColor: selectedColor }}
       zoom={13}
       center={POSITION}
       zoomControl={false}
